@@ -24,9 +24,18 @@ return new class extends Migration
             $table->date('tanggal_lahir');
             $table->string('nomor_kk');
             $table->string('nik')->unique();
-            $table->string('nama_sekolah');
-            $table->string('kelas');
-            $table->string('nisn')->unique();
+            $table->boolean('is_sekolah')->default(true);
+            $table->foreignId('kelas_id')
+                ->index()
+                ->references('id')->on('m_kelas')
+                ->constrained()->cascadeOnUpdate()->restrictOnDelete()
+                ->nullable();
+            $table->foreignId('sekolah_id')
+                ->index()
+                ->references('id')->on('m_sekolah')
+                ->constrained()->cascadeOnUpdate()->restrictOnDelete()
+                ->nullable();
+            $table->string('nisn')->unique()->nullable();
             $table->text('foto');
             $table->string('nama_ayah');
             $table->string('nama_ibu');

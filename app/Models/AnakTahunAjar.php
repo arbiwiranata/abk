@@ -19,12 +19,12 @@ class AnakTahunAjar extends Model
         return $this->belongsTo(Anak::class, 'anak_id');
     }
  
-    public function tahunAjar(): BelongsTo
+    public function mTahunAjar(): BelongsTo
     {
         return $this->belongsTo(MTahunAjar::class, 'tahun_ajar_id');
     }
 
-    public function jenisLayanan(): BelongsTo
+    public function mJenisLayanan(): BelongsTo
     {
         return $this->belongsTo(MJenisLayanan::class, 'jenis_layanan_id');
     }

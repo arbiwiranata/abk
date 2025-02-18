@@ -34,23 +34,24 @@ class MHambatan extends Model
 
     public static function groupHambatans()
     {
-        $jenisHambatans = MJenisHambatan::with('mHambatans')->get();
+        // $jenisHambatans = MJenisHambatan::with('mHambatans')->get();
 
-        $options = [];
+        // $options = [];
 
-        foreach ($jenisHambatans as $jenisHambatan) {
-            $group = [
-                'label' => $jenisHambatan->nama,
-                'options' => [],
-            ];
+        // foreach ($jenisHambatans as $jenisHambatan) {
+        //     $group = [
+        //         'label' => $jenisHambatan->nama,
+        //         'options' => [],
+        //     ];
 
-            foreach ($jenisHambatan->mHambatans as $hambatan) {
-                $group['options'][$hambatan->id] = $hambatan->nama;
-            }
+        //     foreach ($jenisHambatan->mHambatans as $hambatan) {
+        //         $group['options'][$hambatan->id] = $hambatan->nama;
+        //     }
 
-            $options[$jenisHambatan->nama] = $group['options'];
-        }
+        //     $options[$jenisHambatan->nama] = $group['options'];
+        // }
 
-        return $options;
+        // return $options;
+        return static::with('mJenisHambatan')->get()->groupBy('mJenisHambatan.nama')->map->pluck('nama', 'id');
     }
 }

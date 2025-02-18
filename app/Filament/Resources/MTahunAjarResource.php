@@ -22,7 +22,7 @@ class MTahunAjarResource extends Resource
 
     protected static ?string $navigationGroup = 'Master';
 
-    protected static ?string $navigationIcon = 'heroicon-o-calendar';
+    protected static ?string $navigationIcon = 'far-calendar-star';
 
     protected static ?string $modelLabel = 'Tahun Ajar';
 
@@ -91,7 +91,8 @@ class MTahunAjarResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->defaultSort('periode_mulai', 'desc');
     }
 
     public static function getPages(): array

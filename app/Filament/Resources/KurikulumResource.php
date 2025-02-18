@@ -26,7 +26,7 @@ class KurikulumResource extends Resource
 
     protected static ?string $navigationGroup = 'Master';
 
-    protected static ?string $navigationIcon = 'heroicon-o-star';
+    protected static ?string $navigationIcon = 'far-book-user';
 
     protected static ?string $modelLabel = 'Kurikulum';
 
@@ -62,19 +62,22 @@ class KurikulumResource extends Resource
                             ->required()
                             ->inline(false)
                             ->default(true)
+                            ->onColor('success')
                             ->label('Aktif'),
                     ])
                     ->columns([
                         'md' => 12,
                     ]),
-                Section::make('Aspek')
+                    Section::make(new HtmlString('Aspek<sup class="text-danger-600 dark:text-danger-400 font-medium">*</sup>'))
                     ->schema([
                         Forms\Components\Repeater::make('kurikulumAspeks')
                             ->relationship()
+                            ->required()
                             ->schema(
                                 static::getAspeksFormSchema()
                             )
                             ->orderColumn('urutan')
+                            ->label('Aspek')
                             ->hiddenLabel()
                             ->itemLabel(fn (array $state): ?string => $state['nama'] ?? null)
                             ->collapsed()
@@ -154,6 +157,7 @@ class KurikulumResource extends Resource
                 ->distinct(),
             Forms\Components\Repeater::make('kurikulumTargets')
                 ->relationship()
+                ->required()
                 ->schema(
                     static::getTargetsFormSchema()
                 )
@@ -203,6 +207,7 @@ class KurikulumResource extends Resource
                 ]),
             Forms\Components\Repeater::make('kurikulumKegiatans')
                 ->relationship()
+                ->required()
                 ->schema(
                     static::getKegiatansFormSchema()
                 )
@@ -241,6 +246,7 @@ class KurikulumResource extends Resource
                 ->distinct(),
             Forms\Components\Repeater::make('kurikulumIndikators')
                 ->relationship()
+                ->required()
                 ->simple(
                     static::getIndikatorsFormSchema()
                 )
@@ -259,6 +265,7 @@ class KurikulumResource extends Resource
     {
         return Forms\Components\TextArea::make('nama')
             ->required()
+            ->label('Nama Indikator')
             ->placeholder('Nama Indikator')
             ->autosize()
             ->distinct();

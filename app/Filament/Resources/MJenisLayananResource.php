@@ -20,7 +20,7 @@ class MJenisLayananResource extends Resource
 
     protected static ?string $navigationGroup = 'Master';
 
-    protected static ?string $navigationIcon = 'heroicon-o-server-stack';
+    protected static ?string $navigationIcon = 'far-globe-pointer';
 
     protected static ?string $modelLabel = 'Jenis Layanan';
 
@@ -63,7 +63,9 @@ class MJenisLayananResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->defaultSort('urutan')
+            ->reorderable('urutan');
     }
 
     public static function getPages(): array

@@ -20,7 +20,7 @@ class MJenisAsesmenResource extends Resource
 
     protected static ?string $navigationGroup = 'Master';
 
-    protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
+    protected static ?string $navigationIcon = 'far-notes-medical';
 
     protected static ?string $modelLabel = 'Jenis Asesmen';
 
@@ -28,14 +28,14 @@ class MJenisAsesmenResource extends Resource
 
     protected static ?string $slug = 'master/jenis-asesmen';
 
-    protected static ?int $navigationSort = 6;
+    protected static ?int $navigationSort = 5;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Section::make()
-                    ->schema(static::getFormSchema())
+                    ->schema(static::getFormSchemaCustom())
             ]);
     }
 
@@ -68,7 +68,7 @@ class MJenisAsesmenResource extends Resource
         ];
     }
 
-    public static function getFormSchema(): array
+    public static function getFormSchemaCustom(): array
     {
         return [
             Forms\Components\TextInput::make('nama')

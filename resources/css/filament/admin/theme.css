@@ -1,0 +1,33 @@
+@import '/vendor/filament/filament/resources/css/theme.css';
+
+@config 'tailwind.config.js';
+
+.fi-main-ctn {
+    background-image: url('/public/images/static/img-beranda.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
+}
+
+.input-1 > div > input::placeholder {
+    /* Most modern browsers support this now. */
+    color: #EFE4D4 !important;
+}
+
+.input-1 > div > input {
+    background-color: #4D8744;
+    padding: 0.5rem 0.938rem;
+    border: 5px solid #D69C6B;
+    width: 100%;
+    color: #fff;
+    transition: 0.25s ease;
+}
+
+.input-1 > div > input:focus {
+    outline: none;
+    background-color: #3F6E38;
+    border: 5px solid #C67042;
+}

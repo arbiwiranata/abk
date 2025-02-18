@@ -36,11 +36,15 @@ class CreateAnak extends CreateRecord
         return [
             Step::make('Data Anak')
                 ->schema([
-                    Section::make()->schema(AnakResource::getDataAnakFormSchema())->columns(),
+                    Section::make()->schema(AnakResource::getDataAnakFormSchema())->columns(3),
+                ]),
+            Step::make('Data Sekolah')
+                ->schema([
+                    Section::make()->schema(AnakResource::getDataSekolahFormSchema())->columns(3),
                 ]),
             Step::make('Data Keluarga')
                 ->schema([
-                    Section::make()->schema(AnakResource::getDataKeluargaFormSchema())->columns(),
+                    Section::make()->schema(AnakResource::getDataKeluargaFormSchema())->columns(3),
                 ]),
             Step::make('Hasil Asesmen')
                 ->schema([
@@ -49,5 +53,12 @@ class CreateAnak extends CreateRecord
                     ]),
                 ]),
         ];
+    }
+
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        unset($data['jenjang_pendidikan']);
+        
+        return $data;
     }
 }

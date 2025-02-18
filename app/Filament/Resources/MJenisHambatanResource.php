@@ -21,7 +21,7 @@ class MJenisHambatanResource extends Resource
 
     protected static ?string $navigationGroup = 'Master';
 
-    protected static ?string $navigationIcon = 'heroicon-o-bookmark-square';
+    protected static ?string $navigationIcon = 'far-face-smile-hearts';
 
     protected static ?string $modelLabel = 'Jenis Hambatan';
 

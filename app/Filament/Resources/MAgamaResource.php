@@ -22,7 +22,7 @@ class MAgamaResource extends Resource
 
     protected static ?string $navigationGroup = 'Master';
 
-    protected static ?string $navigationIcon = 'heroicon-o-language';
+    protected static ?string $navigationIcon = 'far-place-of-worship';
 
     protected static ?string $modelLabel = 'Agama';
 
@@ -75,8 +75,8 @@ class MAgamaResource extends Resource
         ];
     }
 
-    public static function canViewAny(): bool
-    {
-        return false;
-    }
+    // public static function canViewAny(): bool
+    // {
+    //     return false;
+    // }
 }

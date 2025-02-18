@@ -32,9 +32,10 @@ class TahunAjarsRelationManager extends RelationManager
                         Forms\Components\Select::make('tahun_ajar_id')
                             ->required()
                             ->relationship(
-                                name: 'tahunAjar',
+                                name: 'mTahunAjar',
                                 titleAttribute: 'nama',
-                                modifyQueryUsing: fn (Builder $query) => $query->where('periode_berakhir', '>=', Carbon::now())->orderBy('periode_mulai')->orderBy('periode_berakhir')
+                                modifyQueryUsing: fn (Builder $query) => $query
+                                    ->where('periode_berakhir', '>=', Carbon::now())->orderBy('periode_mulai')->orderBy('periode_berakhir')
                             )
                             ->getOptionLabelFromRecordUsing(fn (Model $record): ?string => "{$record->nama} [{$record->periode_mulai?->translatedFormat('d F Y')} - {$record->periode_berakhir?->translatedFormat('d F Y')}]")
                             ->unique(ignoreRecord: true, modifyRuleUsing: function (Unique $rule) {
@@ -43,7 +44,12 @@ class TahunAjarsRelationManager extends RelationManager
                             ->label('Tahun Ajar'),
                         Forms\Components\Select::make('jenis_layanan_id')
                             ->required()
-                            ->relationship('jenisLayanan', 'nama')
+                            ->relationship(
+                                name: 'mJenisLayanan',
+                                titleAttribute: 'nama',
+                                modifyQueryUsing: fn (Builder $query) => $query
+                                    ->orderBy('urutan')
+                            )
                             ->label('Jenis Layanan'),
                         Forms\Components\Select::make('kurikulum_id')
                             ->relationship('kurikulum', 'nama')
@@ -64,6 +70,8 @@ class TahunAjarsRelationManager extends RelationManager
                             ->schema([
                                 Forms\Components\Select::make('pegawai_id')
                                     ->required()
+                                    ->searchable()
+                                    ->preload()
                                     ->distinct()
                                     ->relationship('pegawai', 'nama'),
                                 Forms\Components\Select::make('jabatan_id')
@@ -77,6 +85,8 @@ class TahunAjarsRelationManager extends RelationManager
                                     }),
                                 Forms\Components\Select::make('matriks_perencanaan_id')
                                     ->relationship('matriksPerencanaan', 'nama')
+                                    ->searchable()
+                                    ->preload()
                                     ->required(fn (Get $get): bool => in_array($get('jabatan_id'), ['5', '6']))
                                     ->disabled(fn (Get $get): bool => !in_array($get('jabatan_id'), ['5', '6']))
                                     ->label('Matriks Perencanaan'),
@@ -104,11 +114,11 @@ class TahunAjarsRelationManager extends RelationManager
     {
         return $table
             ->heading('Tahun Ajar')
-            ->recordTitle(fn (AnakTahunAjar $record): string => "{$record->tahunAjar->nama}")
+            ->recordTitle(fn (AnakTahunAjar $record): string => "{$record->mTahunAjar->nama}")
             ->columns([
-                Tables\Columns\TextColumn::make('tahunAjar.nama')
+                Tables\Columns\TextColumn::make('mTahunAjar.nama')
                     ->label('Tahun Ajar'),
-                Tables\Columns\TextColumn::make('jenisLayanan.nama')
+                Tables\Columns\TextColumn::make('mJenisLayanan.nama')
                     ->label('Jenis Layanan'),
                 Tables\Columns\TextColumn::make('kurikulum.nama'),
                 Tables\Columns\TextColumn::make('terapis.nama'),

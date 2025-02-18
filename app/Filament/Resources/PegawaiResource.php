@@ -25,7 +25,7 @@ class PegawaiResource extends Resource
 
     protected static ?string $navigationGroup = 'User';
 
-    protected static ?string $navigationIcon = 'heroicon-o-users';
+    protected static ?string $navigationIcon = 'far-users-line';
 
     protected static ?string $modelLabel = 'Pegawai';
 
@@ -125,11 +125,13 @@ class PegawaiResource extends Resource
                                     ->required()
                                     ->inline(false)
                                     ->default(false)
+                                    ->onColor('success')
                                     ->label('Admin'),
                                 Forms\Components\Toggle::make('is_aktif')
                                     ->required()
                                     ->inline(false)
                                     ->default(true)
+                                    ->onColor('success')
                                     ->label('Aktif')
                                     ->hiddenOn('create'),
                             ])

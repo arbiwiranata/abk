@@ -20,7 +20,7 @@ class MJabatanResource extends Resource
 
     protected static ?string $navigationGroup = 'Master';
 
-    protected static ?string $navigationIcon = 'heroicon-o-view-columns';
+    protected static ?string $navigationIcon = 'far-sitemap';
 
     protected static ?string $modelLabel = 'Jabatan';
 
@@ -80,8 +80,8 @@ class MJabatanResource extends Resource
         ];
     }
 
-    public static function canViewAny(): bool
-    {
-        return false;
-    }
+    // public static function canViewAny(): bool
+    // {
+    //     return false;
+    // }
 }

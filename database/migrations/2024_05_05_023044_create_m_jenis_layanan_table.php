@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('m_jenis_layanan', function (Blueprint $table) {
             $table->id();
             $table->string('nama')->unique();
+            $table->integer('urutan');
             $table->timestamps();
         });
     }

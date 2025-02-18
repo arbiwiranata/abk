@@ -17,6 +17,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\HtmlString;
 
 class MatriksPerencanaanResource extends Resource
 {
@@ -24,7 +25,7 @@ class MatriksPerencanaanResource extends Resource
 
     protected static ?string $navigationGroup = 'Master';
 
-    protected static ?string $navigationIcon = 'heroicon-o-table-cells';
+    protected static ?string $navigationIcon = 'far-list-tree';
 
     protected static ?string $modelLabel = 'Matriks Perencanaan';
 
@@ -60,20 +61,23 @@ class MatriksPerencanaanResource extends Resource
                             ->required()
                             ->inline(false)
                             ->default(true)
+                            ->onColor('success')
                             ->label('Aktif'),
                     ])
                     ->columns([
                         'md' => 12,
                     ]),
-                Section::make('Aspek')
+                Section::make(new HtmlString('Aspek<sup class="text-danger-600 dark:text-danger-400 font-medium">*</sup>'))
                     ->schema([
                         Forms\Components\Repeater::make('matriksPerencanaanAspeks')
                             ->relationship()
+                            ->required()
                             ->schema(
                                 static::getAspeksFormSchema()
                             )
                             ->columns(2)
                             ->orderColumn('urutan')
+                            ->label('Aspek')
                             ->hiddenLabel()
                             ->itemLabel(fn (array $state): ?string => $state['nama'] ?? null)
                             ->collapsed()
@@ -153,6 +157,7 @@ class MatriksPerencanaanResource extends Resource
                 ->distinct(),
             Forms\Components\Repeater::make('matriksPerencanaanItems')
                 ->relationship()
+                ->required()
                 ->schema(
                     static::getItemsFormSchema()
                 )
@@ -190,6 +195,7 @@ class MatriksPerencanaanResource extends Resource
                 ->distinct(),
             Forms\Components\Repeater::make('matriksPerencanaanSubitems')
                 ->relationship()
+                ->required()
                 ->simple(
                     static::getSubitemsFormSchema()
                 )
@@ -208,6 +214,7 @@ class MatriksPerencanaanResource extends Resource
     {
         return Forms\Components\TextArea::make('nama')
             ->required()
+            ->label('Nama Subitem')
             ->placeholder('Nama Subitem')
             ->autosize()
             ->distinct();
