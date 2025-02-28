@@ -70,13 +70,13 @@ class PegawaiResource extends Resource
                             ->label('NIP')
                             ->helperText('Nomor Identitas Pegawai Negeri Sipil'),
                         Forms\Components\DatePicker::make('tmt_masuk')
+                            ->required()    
                             ->native(false)
                             ->closeOnDateSelection()
                             ->maxDate(now())
-                            ->displayFormat('d-m-Y')
-                            ->placeholder('dd-mm-yyyy')
+                            ->displayFormat('d F Y')
                             ->label('TMT Masuk')
-                            ->suffixIcon('heroicon-m-calendar-days'),
+                            ->suffixIcon('fas-calendar-days'),
                         Forms\Components\Select::make('jabatans')
                             ->required()
                             ->multiple()
@@ -102,15 +102,15 @@ class PegawaiResource extends Resource
                             ->native(false)
                             ->closeOnDateSelection()
                             ->maxDate(now())
-                            ->displayFormat('d-m-Y')
-                            ->placeholder('dd-mm-yyyy')
+                            ->displayFormat('l, d F Y')
                             ->label('Tanggal Lahir')
-                            ->suffixIcon('heroicon-m-calendar-days'),
+                            ->suffixIcon('fas-calendar-days'),
                         Forms\Components\TextInput::make('nomor_hp')
                             ->minLength(10)
                             ->maxLength(13)
                             ->mask('0999999999999')
-                            ->label('Nomor HP'),
+                            ->label('Nomor HP')
+                            ->helperText('Nomor Yang Memiliki WhatsApp'),
                         Forms\Components\TextInput::make('email')
                             ->email()
                             ->maxLength(255),
@@ -118,20 +118,24 @@ class PegawaiResource extends Resource
                             ->directory('pegawai/foto')
                             ->image()
                             ->maxSize(1024)
-                            ->helperText('Foto harus berupa format jpg, jpeg, png (maks. 1 MB)'),
+                            ->helperText('Foto formal harus berupa format jpg, jpeg, png (maks. 1 MB)'),
                         Forms\Components\Group::make()
                             ->schema([
                                 Forms\Components\Toggle::make('is_admin')
-                                    ->required()
                                     ->inline(false)
                                     ->default(false)
+                                    ->onIcon('fas-check')
+                                    ->offIcon('fas-xmark')
                                     ->onColor('success')
+                                    ->offColor('danger')
                                     ->label('Admin'),
                                 Forms\Components\Toggle::make('is_aktif')
-                                    ->required()
                                     ->inline(false)
                                     ->default(true)
+                                    ->onIcon('fas-check')
+                                    ->offIcon('fas-xmark')
                                     ->onColor('success')
+                                    ->offColor('danger')
                                     ->label('Aktif')
                                     ->hiddenOn('create'),
                             ])
@@ -146,7 +150,8 @@ class PegawaiResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('foto')
-                    ->circular(),
+                    ->circular()
+                    ->label(false),
                 Tables\Columns\TextColumn::make('nik')
                     ->searchable()
                     ->label('NIK'),

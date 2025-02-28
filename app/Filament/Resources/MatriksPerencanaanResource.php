@@ -58,10 +58,12 @@ class MatriksPerencanaanResource extends Resource
                                 'md' => 5,
                             ]),
                         Forms\Components\Toggle::make('is_aktif')
-                            ->required()
                             ->inline(false)
                             ->default(true)
+                            ->onIcon('fas-check')
+                            ->offIcon('fas-xmark')
                             ->onColor('success')
+                            ->offColor('danger')
                             ->label('Aktif'),
                     ])
                     ->columns([
@@ -111,7 +113,6 @@ class MatriksPerencanaanResource extends Resource
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('mHambatan.nama')
-                    ->numeric()
                     ->sortable()
                     ->label('Hambatan'),
                 Tables\Columns\IconColumn::make('is_aktif')

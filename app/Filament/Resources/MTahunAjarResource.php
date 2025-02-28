@@ -48,17 +48,17 @@ class MTahunAjarResource extends Resource
                                     ->required()
                                     ->native(false)
                                     ->closeOnDateSelection()
-                                    ->displayFormat('d-m-Y')
+                                    ->displayFormat('d F Y')
                                     ->label('Periode Mulai')
-                                    ->suffixIcon('heroicon-m-calendar-days'),
+                                    ->suffixIcon('fas-calendar-days'),
                                 Forms\Components\DatePicker::make('periode_berakhir')
                                     ->required()
                                     ->afterOrEqual('periode_mulai')
                                     ->native(false)
                                     ->closeOnDateSelection()
-                                    ->displayFormat('d-m-Y')
+                                    ->displayFormat('d F Y')
                                     ->label('Periode Berakhir')
-                                    ->suffixIcon('heroicon-m-calendar-days'),
+                                    ->suffixIcon('fas-calendar-days'),
                             ])
                     ])
             ]);

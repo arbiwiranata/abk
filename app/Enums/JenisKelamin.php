@@ -2,6 +2,7 @@
 
 namespace App\Enums;
 
+use Filament\Support\Colors\Color;
 use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasIcon;
 use Filament\Support\Contracts\HasLabel;
@@ -23,8 +24,8 @@ enum JenisKelamin: string implements HasColor, HasLabel, HasIcon
     public function getColor(): string | array | null
     {
         return match ($this) {
-            self::L => 'info',
-            self::P => 'primary',
+            self::L => Color::Blue,
+            self::P => Color::Pink,
         };
     }
 

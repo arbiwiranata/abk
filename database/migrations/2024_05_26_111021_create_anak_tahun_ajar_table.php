@@ -42,9 +42,9 @@ return new class extends Migration
                 ->constrained()->cascadeOnUpdate()->restrictOnDelete();
             $table->text('kesimpulan')->nullable();
             $table->text('saran')->nullable();
-            $table->enum('status', ['MP', 'PT', 'SH', 'R'])
-                ->default('MP')
-                ->comment('MP = Matriks Perencanaan; PT = Program Terapi; SH = Skenario Harian; R = Report');
+            $table->enum('status', ['D', 'MP', 'PT', 'SH', 'R'])
+                ->default('D')
+                ->comment('D = Draft; MP = Matriks Perencanaan; PT = Program Terapi; SH = Skenario Harian; R = Report');
             $table->boolean('is_aktif')->default(true);
             $table->timestamps();
         });

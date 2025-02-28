@@ -2,8 +2,8 @@
 
 namespace App\Providers\Filament;
 
-// use Althinect\FilamentSpatieRolesPermissions\FilamentSpatieRolesPermissionsPlugin;
 use App\Filament\Pages\Auth\Login;
+use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\Enums\ThemeMode;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -35,7 +35,7 @@ class AdminPanelProvider extends PanelProvider
             ->domain('abk.test')
             ->path('')
             ->spa()
-            ->unsavedChangesAlerts()
+            // ->unsavedChangesAlerts()
             ->login(Login::class)
             ->profile(EditProfile::class)
             ->maxContentWidth(MaxWidth::ScreenTwoExtraLarge)
@@ -82,7 +82,8 @@ class AdminPanelProvider extends PanelProvider
                     ->imageProvider(
                         MyImages::make()
                             ->directory('images/bg-login')
-                    )
+                    ),
+                FilamentShieldPlugin::make(),
                 // FilamentSpatieRolesPermissionsPlugin::make(),
             ])
             ->viteTheme('resources/css/filament/admin/theme.css');

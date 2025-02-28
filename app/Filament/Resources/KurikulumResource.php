@@ -59,47 +59,49 @@ class KurikulumResource extends Resource
                                 'md' => 5,
                             ]),
                         Forms\Components\Toggle::make('is_aktif')
-                            ->required()
                             ->inline(false)
                             ->default(true)
+                            ->onIcon('fas-check')
+                            ->offIcon('fas-xmark')
                             ->onColor('success')
+                            ->offColor('danger')
                             ->label('Aktif'),
                     ])
                     ->columns([
                         'md' => 12,
                     ]),
                     Section::make(new HtmlString('Aspek<sup class="text-danger-600 dark:text-danger-400 font-medium">*</sup>'))
-                    ->schema([
-                        Forms\Components\Repeater::make('kurikulumAspeks')
-                            ->relationship()
-                            ->required()
-                            ->schema(
-                                static::getAspeksFormSchema()
-                            )
-                            ->orderColumn('urutan')
-                            ->label('Aspek')
-                            ->hiddenLabel()
-                            ->itemLabel(fn (array $state): ?string => $state['nama'] ?? null)
-                            ->collapsed()
-                            ->cloneable()
-                            ->live()
-                            ->deleteAction(
-                                fn (Action $action) => $action->requiresConfirmation(),
-                            )
-                            ->addAction(
-                                fn (Action $action) => $action
-                                    ->label('Tambahkan Aspek')
-                                    ->color('success')
-                            )
-                            ->collapseAllAction(
-                                fn (Action $action) => $action
-                                    ->hidden()
-                            )
-                            ->expandAllAction(
-                                fn (Action $action) => $action
-                                    ->hidden()
-                            ),
-                    ])
+                        ->schema([
+                            Forms\Components\Repeater::make('kurikulumAspeks')
+                                ->relationship()
+                                ->required()
+                                ->schema(
+                                    static::getAspeksFormSchema()
+                                )
+                                ->orderColumn('urutan')
+                                ->label('Aspek')
+                                ->hiddenLabel()
+                                ->itemLabel(fn (array $state): ?string => $state['nama'] ?? null)
+                                ->collapsed()
+                                ->cloneable()
+                                ->live()
+                                ->deleteAction(
+                                    fn (Action $action) => $action->requiresConfirmation(),
+                                )
+                                ->addAction(
+                                    fn (Action $action) => $action
+                                        ->label('Tambahkan Aspek')
+                                        ->color('success')
+                                )
+                                ->collapseAllAction(
+                                    fn (Action $action) => $action
+                                        ->hidden()
+                                )
+                                ->expandAllAction(
+                                    fn (Action $action) => $action
+                                        ->hidden()
+                                ),
+                        ])
             ]);
     }
 
@@ -111,7 +113,6 @@ class KurikulumResource extends Resource
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('mHambatan.nama')
-                    ->numeric()
                     ->sortable()
                     ->label('Hambatan'),
                 Tables\Columns\IconColumn::make('is_aktif')

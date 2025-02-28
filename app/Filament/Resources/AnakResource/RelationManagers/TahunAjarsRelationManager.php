@@ -35,7 +35,9 @@ class TahunAjarsRelationManager extends RelationManager
                                 name: 'mTahunAjar',
                                 titleAttribute: 'nama',
                                 modifyQueryUsing: fn (Builder $query) => $query
-                                    ->where('periode_berakhir', '>=', Carbon::now())->orderBy('periode_mulai')->orderBy('periode_berakhir')
+                                    ->where('periode_berakhir', '>=', Carbon::now())
+                                    ->orderBy('periode_berakhir', 'desc')    
+                                    ->orderBy('periode_mulai', 'desc')
                             )
                             ->getOptionLabelFromRecordUsing(fn (Model $record): ?string => "{$record->nama} [{$record->periode_mulai?->translatedFormat('d F Y')} - {$record->periode_berakhir?->translatedFormat('d F Y')}]")
                             ->unique(ignoreRecord: true, modifyRuleUsing: function (Unique $rule) {

@@ -130,7 +130,7 @@ class AnakResource extends Resource
                         Split::make([
                             ImageEntry::make('foto')
                                 ->hiddenLabel()
-                                ->height(150)
+                                ->height(180)
                                 ->grow(false)
                                 ->square(),
                             Group::make([
@@ -139,20 +139,31 @@ class AnakResource extends Resource
                                     ->size('text-3xl')
                                     ->weight(FontWeight::ExtraBold)
                                     ->color('info'),
-                                TextEntry::make('hambatans.nama')
+                                TextEntry::make('nik')
+                                    ->hiddenLabel()
+                                    ->icon('fal-id-card')
+                                    ->iconColor('info')
+                                    ->size(TextEntry\TextEntrySize::Medium),
+                                TextEntry::make('tanggal_lahir')
+                                    ->hiddenLabel()
+                                    ->icon('fal-cake-candles')
+                                    ->iconColor('primary')
+                                    ->size(TextEntry\TextEntrySize::Medium)
+                                    ->formatStateUsing(fn (string $state, Anak $record): string => $record->tempat_lahir . ', ' . Carbon::parse($state)->translatedFormat('d F Y') . ' [' . $record->age . ' Tahun]'),
+                                TextEntry::make('mHambatans.nama')
                                     ->hiddenLabel()
                                     ->badge()
                                     ->icon('fas-heart')
                                     ->color('danger'),
-                                TextEntry::make('tanggal_lahir')
-                                    ->hiddenLabel()
-                                    ->date('d F Y')
-                                    ->icon('fal-cake-candles')
-                                    ->iconColor('primary')
-                                    ->size(TextEntry\TextEntrySize::Medium)
-                                    ->formatStateUsing(fn (string $state, Anak $record): string => $record->tempat_lahir . ', ' . Carbon::parse($state)->translatedFormat('d F Y') . ' - ' . $record->age . ' Tahun'),
+                            ])
+                            ->extraAttributes([
+                                'class' => 'text-center md:text-left flex flex-col items-center md:items-start'
                             ]),
-                        ])->from('lg'),
+                        ])
+                        ->from('lg')
+                        ->extraAttributes([
+                            'class' => 'flex flex-col md:flex-row items-center md:items-start justify-center'
+                        ]),
                     ])
             ]);
     }
@@ -168,7 +179,7 @@ class AnakResource extends Resource
     public static function getRelations(): array
     {
         return [
-            TahunAjarsRelationManager::class
+            // TahunAjarsRelationManager::class
         ];
     }
 
@@ -204,10 +215,10 @@ class AnakResource extends Resource
                 ->native(false)
                 ->closeOnDateSelection()
                 ->maxDate(now())
-                ->displayFormat('d-m-Y')
+                ->displayFormat('l, d F Y')
                 ->placeholder('dd-mm-yyyy')
                 ->label('Tanggal Lahir')
-                ->suffixIcon('heroicon-m-calendar-days'),
+                ->suffixIcon('fas-calendar-days'),
             Forms\Components\Select::make('agama_id')
                 ->required()
                 ->relationship('mAgama', 'nama')
@@ -224,7 +235,7 @@ class AnakResource extends Resource
                 ->directory('anak/foto')
                 ->image()
                 ->maxSize(1024)
-                ->helperText('Foto harus berupa format jpg, jpeg, png (maks. 1 MB)'),
+                ->helperText('Foto formal harus berupa format jpg, jpeg, png (maks. 1 MB)'),
             Forms\Components\Select::make('mHambatans')
                 ->required()
                 ->multiple()
@@ -233,11 +244,13 @@ class AnakResource extends Resource
                 ->preload()
                 ->label('Hambatan'),
             Forms\Components\Toggle::make('is_aktif')
-                ->required()
                 ->inline(false)
                 ->default(true)
-                ->label('Aktif')
+                ->onIcon('fas-check')
+                ->offIcon('fas-xmark')
                 ->onColor('success')
+                ->offColor('danger')
+                ->label('Aktif')
                 ->hiddenOn('create'),
         ];
     }
@@ -366,7 +379,8 @@ class AnakResource extends Resource
                 ->minLength(10)
                 ->maxLength(13)
                 ->mask('0999999999999')
-                ->label('Nomor HP'),
+                ->label('Nomor HP')
+                ->helperText('Nomor Yang Memiliki WhatsApp'),
             Forms\Components\TextInput::make('email')
                 ->email()
                 ->required()
