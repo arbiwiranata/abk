@@ -22,7 +22,7 @@ class EditAnakTahunAjar extends EditRecord
         return [
             // Actions\EditAction::make(),
             // ...parent::getSubmitFormAction(),
-            Actions\Action::make('close')->action('createAndClose'),
+            // Actions\Action::make('close')->action('createAndClose'),
         ];
     }
 }

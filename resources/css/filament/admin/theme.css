@@ -7,9 +7,9 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    background-attachment: fixed;
     width: 100%;
-    height: 100vh;
-    overflow: auto;
+    min-height: 100vh;
 }
 
 .input-1 > div > input::placeholder {

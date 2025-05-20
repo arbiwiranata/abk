@@ -179,7 +179,7 @@ class AnakResource extends Resource
     public static function getRelations(): array
     {
         return [
-            // TahunAjarsRelationManager::class
+            TahunAjarsRelationManager::class
         ];
     }
 

@@ -1,5 +1,5 @@
 <?php
-$path = 'resources/svg/Font Awesome Pro 6.5.2/';
+$path = 'resources/svg/Font Awesome Pro 6.7.2/';
 
 return [
 
@@ -99,6 +99,18 @@ return [
         //     ],
         //
         // ],
+        'brands' => [
+            'path' => $path . 'brands',
+            'disk' => '',
+            'prefix' => 'fab',
+            'class' => '',
+            'fallback' => '',
+            'attributes' => [
+                'fill' => 'currentColor',
+                'aria-hidden' => 'true',
+                'data-slot' => 'icon'
+            ]
+        ],
         'solid' => [
             'path' => $path . 'solid',
             'disk' => '',
@@ -135,18 +147,6 @@ return [
                 'data-slot' => 'icon'
             ]
         ],
-        'duotone' => [
-            'path' => $path . 'duotone',
-            'disk' => '',
-            'prefix' => 'fad',
-            'class' => '',
-            'fallback' => '',
-            'attributes' => [
-                'fill' => 'currentColor',
-                'aria-hidden' => 'true',
-                'data-slot' => 'icon'
-            ]
-        ],
         'thin' => [
             'path' => $path . 'thin',
             'disk' => '',
@@ -159,10 +159,46 @@ return [
                 'data-slot' => 'icon'
             ]
         ],
-        'brands' => [
-            'path' => $path . 'brands',
+        'duotone' => [
+            'path' => $path . 'duotone',
             'disk' => '',
-            'prefix' => 'fab',
+            'prefix' => 'fad',
+            'class' => '',
+            'fallback' => '',
+            'attributes' => [
+                'fill' => 'currentColor',
+                'aria-hidden' => 'true',
+                'data-slot' => 'icon'
+            ]
+        ],
+        'duotone-regular' => [
+            'path' => $path . 'duotone-regular',
+            'disk' => '',
+            'prefix' => 'fadr',
+            'class' => '',
+            'fallback' => '',
+            'attributes' => [
+                'fill' => 'currentColor',
+                'aria-hidden' => 'true',
+                'data-slot' => 'icon'
+            ]
+        ],
+        'duotone-light' => [
+            'path' => $path . 'duotone-light',
+            'disk' => '',
+            'prefix' => 'fadl',
+            'class' => '',
+            'fallback' => '',
+            'attributes' => [
+                'fill' => 'currentColor',
+                'aria-hidden' => 'true',
+                'data-slot' => 'icon'
+            ]
+        ],
+        'duotone-thin' => [
+            'path' => $path . 'duotone-thin',
+            'disk' => '',
+            'prefix' => 'fadt',
             'class' => '',
             'fallback' => '',
             'attributes' => [
@@ -211,6 +247,54 @@ return [
             'path' => $path . 'sharp-thin',
             'disk' => '',
             'prefix' => 'fast',
+            'class' => '',
+            'fallback' => '',
+            'attributes' => [
+                'fill' => 'currentColor',
+                'aria-hidden' => 'true',
+                'data-slot' => 'icon'
+            ]
+        ],
+        'sharp-duotune-solid' => [
+            'path' => $path . 'sharp-duotone-solid',
+            'disk' => '',
+            'prefix' => 'fasds',
+            'class' => '',
+            'fallback' => '',
+            'attributes' => [
+                'fill' => 'currentColor',
+                'aria-hidden' => 'true',
+                'data-slot' => 'icon'
+            ]
+        ],
+        'sharp-duotone-regular' => [
+            'path' => $path . 'sharp-duotone-regular',
+            'disk' => '',
+            'prefix' => 'fasdr',
+            'class' => '',
+            'fallback' => '',
+            'attributes' => [
+                'fill' => 'currentColor',
+                'aria-hidden' => 'true',
+                'data-slot' => 'icon'
+            ]
+        ],
+        'sharp-duotone-light' => [
+            'path' => $path . 'sharp-duotone-light',
+            'disk' => '',
+            'prefix' => 'fasdl',
+            'class' => '',
+            'fallback' => '',
+            'attributes' => [
+                'fill' => 'currentColor',
+                'aria-hidden' => 'true',
+                'data-slot' => 'icon'
+            ]
+        ],
+        'sharp-duotone-thin' => [
+            'path' => $path . 'sharp-duotone-thin',
+            'disk' => '',
+            'prefix' => 'fasdt',
             'class' => '',
             'fallback' => '',
             'attributes' => [

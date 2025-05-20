@@ -120,6 +120,7 @@ class AnakTahunAjarResource extends Resource
                             ->native(false)
                             ->label('Jenis Layanan'),
                         Forms\Components\Select::make('key_terapis_id')
+                            ->required()
                             ->relationship(
                                 name: 'keyTerapis',
                                 titleAttribute: 'nama',
@@ -135,6 +136,7 @@ class AnakTahunAjarResource extends Resource
                             ->native(false)
                             ->label('Key Terapis'),
                         Forms\Components\Select::make('terapis_id')
+                            ->required()
                             ->relationship(
                                 name: 'terapis',
                                 titleAttribute: 'nama',
